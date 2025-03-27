@@ -1,0 +1,348 @@
+body {
+    font-family: 'Poppins', 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f8ff;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow: hidden;
+    color: #333;
+}
+
+/* Estilos para el video promocional */
+.promo-video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+    transition: opacity 0.8s ease;
+}
+
+.promo-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Estilos para el logo */
+.logo-container {
+    position: fixed;
+    top: 40px;
+    left: 40px;
+    z-index: 1500;
+    transition: all 0.8s ease;
+    transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.logo {
+    width: 220px;
+    height: auto;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+/* Posición del logo cuando se muestra un producto */
+.product-active .logo-container {
+    top: 50%;
+    left: 20%; /* Cambio de 15% a 30% para moverlo más hacia el centro */
+    transform: translate(-50%, -50%);
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-active .logo {
+    width: 80%;
+    max-width: 250px;
+}
+
+/* Ocultar video cuando se muestra un producto */
+.product-active .promo-video-container {
+    opacity: 0.05;
+    filter: blur(12px);
+}
+
+.fullscreen-mode {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Ocultar header en el diseño moderno */
+.fullscreen-header {
+    display: none;
+}
+
+.fullscreen-message {
+    text-align: center;
+    color: #000000;
+    font-size: 1.8rem;
+    padding: 60px 120px;
+    margin-top: 0;
+    z-index: 1100;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.13);
+    border-radius: 20px;
+    max-width: 600px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    backdrop-filter: blur(10px);
+}
+
+#product-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    z-index: 1200;
+    position: relative;
+    transition: all 0.5s ease;
+}
+
+
+.product-active .fullscreen-product {
+    transform: translate(-50%, -50%) translateY(0);
+    opacity: 1;
+}
+
+.fullscreen-product .codigo {
+    font-size: 1.4rem; /* Aumentar tamaño */
+    color: #64748b;
+    background-color: #f1f5f9;
+    padding: 10px 20px;
+    border-radius: 8px;
+    display: inline-block;
+    margin-bottom: 30px;
+    font-family: 'Roboto Mono', monospace;
+    letter-spacing: 0.5px;
+}
+
+.fullscreen-product .nombre {
+    font-size: 4.5rem; /* Mucho más grande */
+    margin-bottom: 20px;
+    color: #1e293b;
+    font-weight: 700;
+    line-height: 1.2;
+    width: 100%;
+}
+
+.fullscreen-product .precio {
+    font-size: 4rem; /* Muy grande pero menor que el nombre */
+    color: #2563eb;
+    font-weight: bold;
+    margin: 20px 0 30px;
+    width: 100%;
+}
+
+.fullscreen-product {
+    width: 70%;
+    max-width: 800px;
+    background-color: white;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    padding: 50px;
+    text-align: center; /* Centrar todo el contenido */
+    position: absolute;
+    top: 50%;
+    left: 65%;
+    transform: translate(-50%, -50%) translateY(50px);
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centrado vertical */
+    align-items: center; /* Centrado horizontal */
+}
+
+.fullscreen-product .descripcion {
+    font-size: 1.4rem;
+    color: #64748b;
+    margin-top: 25px;
+    line-height: 1.6;
+    max-width: 80%;
+}
+
+.product-animation {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) translateY(0);
+    }
+}
+
+/* Estilos para el icono de escáner */
+.scanner-icon {
+    font-size: 60px;
+    color: #2563eb;
+    margin-bottom: 30px;
+    animation: scan 2s infinite;
+}
+
+@keyframes pulseHighlight {
+    0% { transform: scale(1); }
+    16.67% { transform: scale(1.05); }
+    33.33% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    66.67% { transform: scale(1); }
+    83.33% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.fullscreen-product .precio {
+    animation: pulseHighlight 4s ease-in-out infinite;
+}
+
+@keyframes scan {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(-10px) scale(1.1);
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Nuevo estilo de escáner con línea de escaneo */
+.scanner-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 30px;
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: rgba(37, 99, 235, 0.1);
+}
+
+.scan-line {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #2563eb;
+    top: 0;
+    left: 0;
+    box-shadow: 0 0 8px 2px rgba(37, 99, 235, 0.6);
+    animation: scanLine 2s ease-in-out infinite;
+}
+
+@keyframes scanLine {
+    0% {
+        top: 0;
+    }
+    50% {
+        top: 100%;
+    }
+    100% {
+        top: 0;
+    }
+}
+
+/* Estilos para el mensaje de producto no encontrado */
+.error-message {
+    color: #e11d48;
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.error-description {
+    color: #64748b;
+    font-size: 1.2rem;
+    margin-top: 20px;
+}
+
+/* Efecto de desvanecimiento para la transición */
+.fade-out {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateY(20px) !important;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 1024px) {
+    .product-active .logo-container {
+        top: 15%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+    }
+    
+    .fullscreen-product {
+        width: 90%;
+        left: 50%;
+        top: 55%;
+        padding: 30px;
+    }
+    
+    .fullscreen-product .descripcion {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .product-active .logo {
+        width: 150px;
+    }
+    
+    .fullscreen-product .precio {
+        font-size: 3rem;
+    }
+    
+    .fullscreen-product .nombre {
+        font-size: 1.8rem;
+    }
+}
+
+.author-signature {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    font-size: 0.75rem;
+    color: rgba(100, 116, 139, 0.7);
+    font-family: 'Poppins', sans-serif;
+    z-index: 1000;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.3s ease;
+}
+
+.author-signature a {
+    color: rgba(37, 99, 235, 0.8);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.author-signature a:hover {
+    color: rgba(37, 99, 235, 1);
+}
+
+/* Hacer la firma más sutil cuando se muestra un producto */
+.product-active .author-signature {
+    opacity: 0.5;
+}
