@@ -117,12 +117,11 @@ app.get('/api/allproductos', async (req, res) => {
         
         if (result.recordset.length === 0) {
             console.log("Producto no encontrado");
-            await speak("Producto no encontrado"); // Esperar a que termine de hablar antes de enviar la respuesta
             return res.status(404).json({ mensaje: "Producto no encontrado" });
         }
 
         const producto = result.recordset[0];
-        const texto = `El producto ${producto.Descripcion} tiene un precio de ${producto.Precio} pesos`;
+        const texto = `Su producto vale ${producto.Precio} pesos`;
         res.json(result.recordset);
         await speak(texto);
     } catch (err) {
